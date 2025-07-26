@@ -1,0 +1,34 @@
+wallet-risk-scoring/
+│
+├── data/                            # Input wallet data
+│   └── wallets.csv                  # CSV file with 100 wallet addresses
+│
+├── model/                           # Trained ML models and scaler
+│   ├── kmeans.pkl                   # Trained KMeans clustering model
+│   ├── model.pkl                    # (Optional) Pickled model file
+│   ├── scaler.pkl                   # Saved Scikit-learn StandardScaler
+│   └── save_scaler.py               # Script to save scaler (one-time)
+│
+├── output/                          # Output results
+│   ├── transactions_raw.json        # Raw transaction data (large, ignored in Git)
+│   ├── wallet_features.csv          # Engineered features per wallet
+│   ├── wallet_scores.csv            # Risk scores (0–1000) for each wallet
+│   └── scored_output.csv            # Output with uploaded addresses + scores
+│
+├── scripts/                         # Core pipeline scripts
+│   ├── fetch_data.py                # Fetch on-chain transaction data
+│   ├── preprocess.py                # Feature engineering & data cleaning
+│   ├── train_model.py               # Train ML model & scaler
+│   └── score.py                     # Generate risk scores
+│
+├── templates/                       # Flask HTML templates
+│   └── index.html                   # UI for wallet score lookup
+│
+├── uploads/                         # CSV upload directory via frontend
+│   └── Wallet_id_-_Sheet1.csv       # Example uploaded CSV
+│
+├── .env                             # Environment config (API keys etc.)
+├── analysis.md                      # Assignment explanation and analysis
+├── app.py                           # Flask app for UI and wallet scoring
+├── project setup                    # Text file documenting setup steps
+└── README.md                        # Project overview and usage guide

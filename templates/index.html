@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallet Risk Score</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">🔍 Wallet Risk Score Checker</h2>
+
+        <!-- Manual Wallet Address Form -->
+        <form method="POST" action="/predict" class="card p-4 shadow mb-4">
+            <div class="mb-3">
+                <label for="wallet_id" class="form-label">Enter Wallet Address</label>
+                <input type="text" class="form-control" id="wallet_id" name="wallet_id" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Score</button>
+        </form>
+
+        <!-- CSV Upload Form -->
+        <form method="POST" action="/upload" enctype="multipart/form-data" class="card p-4 shadow">
+            <div class="mb-3">
+                <label for="file" class="form-label">Upload CSV with wallet_id column</label>
+                <input type="file" class="form-control" id="file" name="file" accept=".csv" required>
+            </div>
+            <button type="submit" class="btn btn-success">Upload and Score</button>
+        </form>
+
+        <!-- Score Display -->
+        {% if score is not none %}
+            <div class="alert alert-success mt-4 text-center">
+                ✅ Score for <strong>{{ wallet_id }}</strong>: <strong>{{ score }}</strong> / 1000
+            </div>
+        {% endif %}
+
+        <!-- Download Link -->
+        {% if download_link %}
+            <div class="alert alert-info mt-4 text-center">
+                ✅ File processed! <a href="{{ download_link }}" class="btn btn-outline-primary" download>Download Scored CSV</a>
+            </div>
+        {% endif %}
+
+        <!-- Error Display -->
+        {% if error %}
+            <div class="alert alert-danger mt-4 text-center">
+                ❌ {{ error }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
